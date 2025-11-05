@@ -30,32 +30,61 @@ else
   exit 1
 fi
 
+# Preguntar si se debe usar docker-compose.prod.yml
+read -p $'\n¿Usar archivo de producción (docker-compose.prod.yml)? [s/N]: ' use_prod
+
+# Establecer comando base de docker compose
+if [[ "$use_prod" =~ ^[sS]$ ]]; then
+  dc="docker compose -f docker-compose.prod.yml"
+else
+  dc="docker compose"
+fi
+
+# Pedir nombre de la rama
+read -p $'\n🔀 Ingrese el nombre de la rama a usar: ' branch
+
+if [ -z "$branch" ]; then
+  echo "❌ No se proporcionó ninguna rama."
+  exit 1
+fi
+
+# Cambiar de rama en el proyecto principal
+echo -e "\n📁 Cambiando rama en el proyecto principal..."
+git fetch origin
+git checkout "$branch" || { echo "❌ La rama '$branch' no existe en el proyecto principal"; exit 1; }
+git pull origin "$branch"
+
 # Actualizar submódulos seleccionados
-echo -e "\n🔄 Actualizando submódulos..."
+echo -e "\n🔄 Cambiando a rama '$branch' y actualizando submódulos..."
 for sub in "${selected[@]}"; do
   echo "📦 $sub"
-  (cd "$sub" && git checkout main && git pull origin main)
+  (
+    cd "$sub"
+    git fetch origin
+    git checkout "$branch" || { echo "⚠️  La rama '$branch' no existe en $sub"; exit 1; }
+    git pull origin "$branch"
+  )
 done
 
-# Construir solo si es uno solo
+# Construir solo si es uno
 if [ "$build_all" = false ]; then
   sub="${selected[0]}"
   service=$(echo "$sub" | tr '[:upper:]' '[:lower:]')
 
   echo -e "\n🧱 Ejecutando 'yarn build' en el contenedor: $service"
-  docker compose exec "$service" yarn build
+  $dc exec "$service" yarn build
 
   echo -e "\n🔁 Reiniciando contenedor: $service"
-  docker compose restart "$service"
+  $dc restart "$service"
 
 else
   echo -e "\n🧱 Ejecutando 'yarn build' en TODOS los servicios activos..."
-  running_services=($(docker compose ps --services --filter status=running))
+  running_services=($($dc ps --services --filter status=running))
   for service in "${running_services[@]}"; do
     echo "🔧 $service"
-    docker compose exec "$service" yarn build
-    docker compose restart "$service"
+    $dc exec "$service" yarn build
+    $dc restart "$service"
   done
 fi
 
-echo -e "\n✅ Proceso completo."
+echo -e "\n✅ Proceso completo en rama '$branch'."
