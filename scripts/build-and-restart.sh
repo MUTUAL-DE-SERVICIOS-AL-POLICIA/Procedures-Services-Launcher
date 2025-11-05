@@ -12,8 +12,8 @@ else
   dc="docker compose"
 fi
 
-# Obtener servicios activos
-services=($($dc ps --services --filter status=running))
+# Obtener servicios activos EXCLUYENDO los que empiezan por "nats"
+mapfile -t services < <($dc ps --services --filter status=running | grep -vE '^nats')
 
 if [ ${#services[@]} -eq 0 ]; then
   echo "⚠️  No hay servicios en ejecución."
