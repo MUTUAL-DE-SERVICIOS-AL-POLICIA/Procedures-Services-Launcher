@@ -94,9 +94,12 @@ services:
 
   inbox-service:
     build:
-      context: ./inbox-service
+      context: ./Inbox-Service
       dockerfile: dockerfile.prod
     env_file:
       - .env
-      - ./inbox-service/.env.compose.template
+      - ./Inbox-Service/.env.compose
+    volumes:
+      - ./Inbox-Service/src:/usr/src/app/src
+      - ./Inbox-Service/package.json:/usr/src/app/package.json
     restart: always
