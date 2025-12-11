@@ -91,7 +91,7 @@ services:
       - .env
       - ./Inbox-service/.env.compose
     volumes:
-      - ./Inbox-service:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./Inbox-service:/app
+      - /app/node_modules
     command: yarn start:dev
     restart: always
