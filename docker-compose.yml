@@ -86,12 +86,12 @@ services:
     restart: always
 
   inbox-service-dev:
-    build: ./Inbox-service
+    build: ./Inbox-Service
     env_file:
       - .env
-      - ./Inbox-service/.env.compose
+      - ./Inbox-Service/.env.compose
     volumes:
-      - ./Inbox-service:/app
+      - ./Inbox-Service:/app
       - /app/node_modules
     command: yarn start:dev
     restart: always
