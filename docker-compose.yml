@@ -63,7 +63,7 @@ services:
       - /app/node_modules
     command: yarn start:dev
     restart: always
-  
+
   app-mobile-service-dev:
     build: ./App-Mobile-Service
     env_file:
@@ -82,5 +82,16 @@ services:
     volumes:
       - ./Records-Service:/app
       - /app/node_modules
+    command: yarn start:dev
+    restart: always
+
+  inbox-service-dev:
+    build: ./Inbox-service
+    env_file:
+      - .env
+      - ./Inbox-service/.env.compose
+    volumes:
+      - ./Inbox-service:/usr/src/app
+      - /usr/src/app/node_modules
     command: yarn start:dev
     restart: always
