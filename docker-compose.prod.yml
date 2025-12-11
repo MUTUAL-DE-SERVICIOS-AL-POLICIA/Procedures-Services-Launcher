@@ -91,3 +91,12 @@ services:
       - ./Records-Service/src:/usr/src/app/src
       - ./Records-Service/package.json:/usr/src/app/package.json
     restart: always
+
+  inbox-service:
+    build:
+      context: ./inbox-service
+      dockerfile: dockerfile.prod
+    env_file:
+      - .env
+      - ./inbox-service/.env.compose.template
+    restart: always
