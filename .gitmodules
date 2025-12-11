@@ -19,3 +19,6 @@
 [submodule "Records-Service"]
 	path = Records-Service
 	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Records-Service.git
+[submodule "Inbox-Service"]
+	path = Inbox-Service
+	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Inbox-Service.git
