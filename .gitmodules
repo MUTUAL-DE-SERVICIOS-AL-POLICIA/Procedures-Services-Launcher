@@ -22,3 +22,9 @@
 [submodule "Inbox-Service"]
 	path = Inbox-Service
 	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Inbox-Service.git
+[submodule "Loans-Service"]
+	path = Loans-Service
+	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Loans-Service.git
+[submodule "Contributions-Service"]
+	path = Contributions-Service
+	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Contributions-Service.git
