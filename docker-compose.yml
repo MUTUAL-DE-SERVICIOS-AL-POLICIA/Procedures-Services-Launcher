@@ -95,3 +95,25 @@ services:
       - /app/node_modules
     command: yarn start:dev
     restart: always
+
+  loans-service-dev:
+    build: ./Loans-Service
+    env_file:
+      - .env
+      - ./Loans-Service/.env.compose
+    volumes:
+      - ./Loans-Service:/app
+      - /app/node_modules
+    command: yarn start:dev
+    restart: always
+
+  contributions-service-dev:
+    build: ./Contributions-Service
+    env_file:
+      - .env
+      - ./Contributions-Service/.env.compose
+    volumes:
+      - ./Contributions-Service:/app
+      - /app/node_modules
+    command: yarn start:dev
+    restart: always
