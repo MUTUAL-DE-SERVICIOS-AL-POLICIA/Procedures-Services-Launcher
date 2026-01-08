@@ -103,3 +103,27 @@ services:
       - ./Inbox-Service/src:/usr/src/app/src
       - ./Inbox-Service/package.json:/usr/src/app/package.json
     restart: always
+
+  loans-service:
+    build:
+      context: ./Loans-Service
+      dockerfile: dockerfile.prod
+    env_file:
+      - .env
+      - ./Loans-Service/.env.compose
+    volumes:
+      - ./Loans-Service/src:/usr/src/app/src
+      - ./Loans-Service/package.json:/usr/src/app/package.json
+    restart: always
+    
+  contributions-service:
+    build:
+      context: ./Contributions-Service
+      dockerfile: dockerfile.prod
+    env_file:
+      - .env
+      - ./Contributions-Service/.env.compose
+    volumes:
+      - ./Contributions-Service/src:/usr/src/app/src
+      - ./Contributions-Service/package.json:/usr/src/app/package.json
+    restart: always
