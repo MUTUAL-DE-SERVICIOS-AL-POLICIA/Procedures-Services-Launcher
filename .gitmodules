@@ -19,3 +19,9 @@
 [submodule "Records-Service"]
 	path = Records-Service
 	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Records-Service.git
+[submodule "Loans-Service"]
+	path = Loans-Service
+	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Loans-Service.git
+[submodule "Contributions-Service"]
+	path = Contributions-Service
+	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Contributions-Service.git
