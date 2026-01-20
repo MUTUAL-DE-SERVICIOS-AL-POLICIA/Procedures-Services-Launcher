@@ -85,17 +85,6 @@ services:
     command: yarn start:dev
     restart: always
 
-  inbox-service-dev:
-    build: ./Inbox-Service
-    env_file:
-      - .env
-      - ./Inbox-Service/.env.compose
-    volumes:
-      - ./Inbox-Service:/app
-      - /app/node_modules
-    command: yarn start:dev
-    restart: always
-
   loans-service-dev:
     build: ./Loans-Service
     env_file:

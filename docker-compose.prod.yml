@@ -92,18 +92,6 @@ services:
       - ./Records-Service/package.json:/usr/src/app/package.json
     restart: always
 
-  inbox-service:
-    build:
-      context: ./Inbox-Service
-      dockerfile: dockerfile.prod
-    env_file:
-      - .env
-      - ./Inbox-Service/.env.compose
-    volumes:
-      - ./Inbox-Service/src:/usr/src/app/src
-      - ./Inbox-Service/package.json:/usr/src/app/package.json
-    restart: always
-
   loans-service:
     build:
       context: ./Loans-Service
