@@ -16,8 +16,8 @@ services:
     ports:
       - ${CLIENT_GATEWAY_PORT}:3000
     volumes:
-      - ./Gateway-Service/src:/usr/src/app/src
-      - ./Gateway-Service/package.json:/usr/src/app/package.json
+      - ./Gateway-Service:/app
+      - ./Gateway-Service/package.json:/app/package.json
     restart: always
 
   beneficiary-service:
@@ -28,8 +28,8 @@ services:
       - .env
       - ./Beneficiary-Service/.env.compose
     volumes:
-      - ./Beneficiary-Service/src:/usr/src/app/src
-      - ./Beneficiary-Service/package.json:/usr/src/app/package.json
+      - ./Beneficiary-Service:/app
+      - ./Beneficiary-Service/package.json:/app/package.json
     restart: always
 
   global-service:
@@ -40,8 +40,8 @@ services:
       - .env
       - ./Global-Service/.env.compose
     volumes:
-      - ./Global-Service/src:/usr/src/app/src
-      - ./Global-Service/package.json:/usr/src/app/package.json
+      - ./Global-Service:/app
+      - ./Global-Service/package.json:/app/package.json
     restart: always
 
   auth-service:
@@ -52,8 +52,8 @@ services:
       - .env
       - ./Auth-Service/.env.compose
     volumes:
-      - ./Auth-Service/src:/usr/src/app/src
-      - ./Auth-Service/package.json:/usr/src/app/package.json
+      - ./Auth-Service:/app
+      - ./Auth-Service/package.json:/app/package.json
     restart: always
 
   kiosk-service:
@@ -64,8 +64,8 @@ services:
       - .env
       - ./Kiosk-Service/.env.compose
     volumes:
-      - ./Kiosk-Service/src:/usr/src/app/src
-      - ./Kiosk-Service/package.json:/usr/src/app/package.json
+      - ./Kiosk-Service:/app
+      - ./Kiosk-Service/package.json:/app/package.json
     restart: always
 
   app-mobile-service:
@@ -76,8 +76,8 @@ services:
       - .env
       - ./App-Mobile-Service/.env.compose
     volumes:
-      - ./App-Mobile-Service/src:/usr/src/app/src
-      - ./App-Mobile-Service/package.json:/usr/src/app/package.json
+      - ./App-Mobile-Service:/app
+      - ./App-Mobile-Service/package.json:/app/package.json
     restart: always
   
   records-service:
@@ -88,8 +88,8 @@ services:
       - .env
       - ./Records-Service/.env.compose
     volumes:
-      - ./Records-Service/src:/usr/src/app/src
-      - ./Records-Service/package.json:/usr/src/app/package.json
+      - ./Records-Service:/app
+      - ./Records-Service/package.json:/app/package.json
     restart: always
 
   loans-service:
@@ -100,8 +100,8 @@ services:
       - .env
       - ./Loans-Service/.env.compose
     volumes:
-      - ./Loans-Service/src:/usr/src/app/src
-      - ./Loans-Service/package.json:/usr/src/app/package.json
+      - ./Loans-Service:/app
+      - ./Loans-Service/package.json:/app/package.json
     restart: always
     
   contributions-service:
@@ -112,6 +112,6 @@ services:
       - .env
       - ./Contributions-Service/.env.compose
     volumes:
-      - ./Contributions-Service/src:/usr/src/app/src
-      - ./Contributions-Service/package.json:/usr/src/app/package.json
+      - ./Contributions-Service:/app
+      - ./Contributions-Service/package.json:/app/package.json
     restart: always
