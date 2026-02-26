@@ -15,9 +15,6 @@ services:
       - ./Gateway-Service/.env.compose
     ports:
       - ${CLIENT_GATEWAY_PORT}:3000
-    volumes:
-      - ./Gateway-Service:/app
-      - ./Gateway-Service/package.json:/app/package.json
     restart: always
 
   beneficiary-service:
@@ -27,9 +24,6 @@ services:
     env_file:
       - .env
       - ./Beneficiary-Service/.env.compose
-    volumes:
-      - ./Beneficiary-Service:/app
-      - ./Beneficiary-Service/package.json:/app/package.json
     restart: always
 
   global-service:
@@ -39,9 +33,6 @@ services:
     env_file:
       - .env
       - ./Global-Service/.env.compose
-    volumes:
-      - ./Global-Service:/app
-      - ./Global-Service/package.json:/app/package.json
     restart: always
 
   auth-service:
@@ -51,9 +42,6 @@ services:
     env_file:
       - .env
       - ./Auth-Service/.env.compose
-    volumes:
-      - ./Auth-Service:/app
-      - ./Auth-Service/package.json:/app/package.json
     restart: always
 
   kiosk-service:
@@ -63,9 +51,6 @@ services:
     env_file:
       - .env
       - ./Kiosk-Service/.env.compose
-    volumes:
-      - ./Kiosk-Service:/app
-      - ./Kiosk-Service/package.json:/app/package.json
     restart: always
 
   app-mobile-service:
@@ -75,9 +60,6 @@ services:
     env_file:
       - .env
       - ./App-Mobile-Service/.env.compose
-    volumes:
-      - ./App-Mobile-Service:/app
-      - ./App-Mobile-Service/package.json:/app/package.json
     restart: always
   
   records-service:
@@ -87,9 +69,6 @@ services:
     env_file:
       - .env
       - ./Records-Service/.env.compose
-    volumes:
-      - ./Records-Service:/app
-      - ./Records-Service/package.json:/app/package.json
     restart: always
 
   loans-service:
@@ -99,9 +78,6 @@ services:
     env_file:
       - .env
       - ./Loans-Service/.env.compose
-    volumes:
-      - ./Loans-Service:/app
-      - ./Loans-Service/package.json:/app/package.json
     restart: always
     
   contributions-service:
@@ -111,7 +87,4 @@ services:
     env_file:
       - .env
       - ./Contributions-Service/.env.compose
-    volumes:
-      - ./Contributions-Service:/app
-      - ./Contributions-Service/package.json:/app/package.json
     restart: always
