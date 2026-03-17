@@ -8,16 +8,20 @@ Launcher para levantar el ecosistema de microservicios con Docker Compose.
 
 ```sh
 git clone https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Procedures-Services-Launcher.git
+```
+
+2. Entrar al directorio
+```sh
 cd Procedures-Services-Launcher
 ```
 
-2. Inicializar los submódulos:
+2. Inicializar los submódulos (micro-servicios):
 
 ```sh
 git submodule update --init --recursive
 ```
 
-3. Crear el archivo de entorno raíz:
+3. Crear el archivo de las variables de entorno raíz:
 
 ```sh
 cp .env.template .env
@@ -39,41 +43,42 @@ cp Contributions-Service/.env.compose.template Contributions-Service/.env.compos
 
 5. Editar `.env` (raiz) y cada `.env.compose` (micro-service) con los valores reales del entorno.
 
-La descripción de cada variable, el orden de carga y qué archivo usa cada servicio está documentado en [ENVDOC.md](./ENVDOC.md).
+La documentacion de cada variable de entorno: [ENVDOC.md](./ENVDOC.md).
 
-6. Levantar el entorno en desarrollo:
+6. Ejecutar el comando para construir las imagenes y correr la aplicacion
+
+#### Desarrollo (DEV)
 
 ```sh
 docker compose build --no-cache && docker compose up
 ```
 
-## Producción
-
-Antes de usar producción, revisa igualmente [ENVDOC.md](./ENVDOC.md) y confirma que todos los `.env.compose` estén configurados.
+#### Producción (PROD)
 
 ```sh
 docker compose -f docker-compose.prod.yml build --no-cache && docker compose -f docker-compose.prod.yml up -d
 ```
 
-## Recrear contenedores
+## RECREAR CONTENEDORES
 
-#### Para recrear todo el entorno (reconstruir todos los contenedores):
+#### RECONSTRUIR TODOS CONTENEDORES
 
 ```sh
-# desarrollo
+# DESARROLLO (DEV)
 docker compose up -d --force-recreate
 
-# producción
+# PRODUCCION (PROD)
 docker compose -f docker-compose.prod.yml up -d --force-recreate
 ```
 
-#### Si cambias el `.env.compose` de un solo servicio, recréalo de forma puntual desde la raíz del launcher.
+#### RECONSTRUIR UN CONTENEDOR ESPECIFICO
+Si cambias el `.env.compose` de un solo servicio, recréalo de forma puntual desde la raíz del launcher.
 
 ```sh
-# desarrollo
+# DESARROLLO (DEV)
 docker compose up <nombre-servicio> -d --force-recreate
 
-# producción
+# PRODUCCION (PROD)
 docker compose -f docker-compose.prod.yml up <nombre-servicio> -d --force-recreate
 ```
 
