@@ -1,59 +1,100 @@
-# PASOS PARA LEVANTAR EL PROYECTO
+# Procedures Services Launcher
 
-1. Clonar el repositorio
+Launcher para levantar el ecosistema de microservicios con Docker Compose.
+
+## Instalación y arranque
+
+1. Clonar el repositorio:
+
 ```sh
 git clone https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Procedures-Services-Launcher.git
-``` 
-2. Crear el `.env` basado en el .env.template
+```
+
+2. Entrar al directorio
 ```sh
-cp .env.template .env
-``` 
-3. Ejecutar el siguiente comando para inicializar los sub-modulos
+cd Procedures-Services-Launcher
+```
+
+2. Inicializar los submódulos (micro-servicios):
+
 ```sh
 git submodule update --init --recursive
-``` 
-4. En cada proyecto crear `.env.compose` basado en el `.env.compose.template`
+```
 
-6. Ejecutar el comando para construir las imágenes y correr la aplicación
-## DEV
+3. Crear el archivo de las variables de entorno raíz:
+
+```sh
+cp .env.template .env
+```
+
+4. Crear el `.env.compose` de cada microservicio antes de ejecutar Docker:
+
+```sh
+cp Gateway-Service/.env.compose.template Gateway-Service/.env.compose
+cp Auth-Service/.env.compose.template Auth-Service/.env.compose
+cp Beneficiary-Service/.env.compose.template Beneficiary-Service/.env.compose
+cp Global-Service/.env.compose.template Global-Service/.env.compose
+cp Kiosk-Service/.env.compose.template Kiosk-Service/.env.compose
+cp App-Mobile-Service/.env.compose.template App-Mobile-Service/.env.compose
+cp Records-Service/.env.compose.template Records-Service/.env.compose
+cp Loans-Service/.env.compose.template Loans-Service/.env.compose
+cp Contributions-Service/.env.compose.template Contributions-Service/.env.compose
+```
+
+5. Editar `.env` (raiz) y cada `.env.compose` (micro-service) con los valores reales del entorno.
+
+La documentacion de cada variable de entorno: [ENVDOC.md](./ENVDOC.md).
+
+6. Ejecutar el comando para construir las imagenes y correr la aplicacion
+
+#### Desarrollo (DEV)
+
 ```sh
 docker compose build --no-cache && docker compose up
 ```
-## PROD
+
+#### Producción (PROD)
+
 ```sh
 docker compose -f docker-compose.prod.yml build --no-cache && docker compose -f docker-compose.prod.yml up -d
-
 ```
 
-#### Para reconstruir todos contenedores
-## dev
+## RECREAR CONTENEDORES
+
+#### RECONSTRUIR TODOS CONTENEDORES
+
 ```sh
+# DESARROLLO (DEV)
 docker compose up -d --force-recreate
-```
-#### prod
-```sh
+
+# PRODUCCION (PROD)
 docker compose -f docker-compose.prod.yml up -d --force-recreate
 ```
-#### Para reconstruir un contenedor especifico
-Si se actualiza el `.env.compose` de un servicio ejecutar desde el proyecto padre
-#### dev
+
+#### RECONSTRUIR UN CONTENEDOR ESPECIFICO
+Si cambias el `.env.compose` de un solo servicio, recréalo de forma puntual desde la raíz del launcher.
+
 ```sh
+# DESARROLLO (DEV)
 docker compose up <nombre-servicio> -d --force-recreate
-```
-#### prod
-```sh
+
+# PRODUCCION (PROD)
 docker compose -f docker-compose.prod.yml up <nombre-servicio> -d --force-recreate
 ```
 
-## Para añadir un nuevo micro servicio (git submodules)
-1. Crear un nuevo repositorio en GitHub
-2. Copiar el Url de nuevo repositorio y en la terminal de `Procedures-Services-Launcher` local ejecutar:
+Reemplaza `gateway-service-dev` o `gateway-service` por el servicio que corresponda.
+
+## Añadir un nuevo microservicio como submódulo
+
+1. Crear el nuevo repositorio.
+2. Agregarlo desde la raíz del launcher:
+
 ```sh
-git submodule add <url>
+git submodule add <url-del-repositorio>
 ```
 
-# Otros
-## Para actualizar los sub modules 
+## Actualizar submódulos
+
 ```sh
 git submodule update --remote
 ```
