@@ -1,6 +1,6 @@
 # Procedures Services Launcher
 
-Launcher para levantar el ecosistema de microservicios con Docker Compose.
+Para levantar el ecosistema de microservicios con Docker Compose.
 
 ## Instalación y arranque
 
@@ -15,19 +15,19 @@ git clone https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Procedures-Services-
 cd Procedures-Services-Launcher
 ```
 
-2. Inicializar los submódulos (micro-servicios):
+3. Inicializar los submódulos (micro-servicios):
 
 ```sh
 git submodule update --init --recursive
 ```
 
-3. Crear el archivo de las variables de entorno raíz:
+4. Crear el archivo de las variables de entorno raíz:
 
 ```sh
 cp .env.template .env
 ```
 
-4. Crear el `.env.compose` de cada microservicio antes de ejecutar Docker:
+6. Crear el `.env.compose` de cada microservicio antes de ejecutar Docker:
 
 ```sh
 cp Gateway-Service/.env.compose.template Gateway-Service/.env.compose
@@ -41,11 +41,11 @@ cp Loans-Service/.env.compose.template Loans-Service/.env.compose
 cp Contributions-Service/.env.compose.template Contributions-Service/.env.compose
 ```
 
-5. Editar `.env` (raiz) y cada `.env.compose` (micro-service) con los valores reales del entorno.
+7. Editar `.env` (raiz) y cada `.env.compose` (micro-service) con los valores reales del entorno.
 
 La documentacion de cada variable de entorno: [ENVDOC.md](./ENVDOC.md).
 
-6. Ejecutar el comando para construir las imagenes y correr la aplicacion
+### Ejecutar el comando para construir las imagenes y correr la aplicacion
 
 #### Desarrollo (DEV)
 
