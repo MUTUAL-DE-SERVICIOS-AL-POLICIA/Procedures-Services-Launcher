@@ -77,10 +77,6 @@ Estas variables no pertenecen a un solo microservicio; se reutilizan en varios c
 
 Archivo documentado: `Gateway-Service/.env.compose`
 
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./Gateway-Service/src/config/envs.ts) -> [src/config/index.ts](./Gateway-Service/src/config/index.ts) -> consumo en [src/main.ts](./Gateway-Service/src/main.ts), [src/common/common.module.ts](./Gateway-Service/src/common/common.module.ts), [src/database/data-source.ts](./Gateway-Service/src/database/data-source.ts) y servicios/controladores.
-
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
 | `PORT` | `3000`<br>`8080` | Puerto interno en el que el proceso NestJS del gateway hace `listen`. |
@@ -108,10 +104,6 @@ Ruta real:
 
 Archivo documentado: `Auth-Service/.env.compose`
 
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./Auth-Service/src/config/envs.ts) -> [src/config/index.ts](./Auth-Service/src/config/index.ts) -> consumo en [src/main.ts](./Auth-Service/src/main.ts), [src/common/common.module.ts](./Auth-Service/src/common/common.module.ts), [src/database/data-source.ts](./Auth-Service/src/database/data-source.ts), [src/auth/strategies/ldap.strategy.ts](./Auth-Service/src/auth/strategies/ldap.strategy.ts), [src/auth/auth.module.ts](./Auth-Service/src/auth/auth.module.ts), [src/auth/auth.service.ts](./Auth-Service/src/auth/auth.service.ts) y [src/auth-app-mobile/auth-app-mobile.service.ts](./Auth-Service/src/auth-app-mobile/auth-app-mobile.service.ts).
-
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
 | `DB_SCHEMA` | `auth`<br>`public` | Define el esquema PostgreSQL sobre el que corre `Auth-Service`. |
@@ -135,10 +127,6 @@ Ruta real:
 
 Archivo documentado: `Beneficiary-Service/.env.compose`
 
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./Beneficiary-Service/src/config/envs.ts) -> [src/config/index.ts](./Beneficiary-Service/src/config/index.ts) -> consumo en [src/main.ts](./Beneficiary-Service/src/main.ts), [src/common/common.module.ts](./Beneficiary-Service/src/common/common.module.ts), [src/database/data-source.ts](./Beneficiary-Service/src/database/data-source.ts), [src/affiliates/affiliates.service.ts](./Beneficiary-Service/src/affiliates/affiliates.service.ts), [src/persons/persons.service.ts](./Beneficiary-Service/src/persons/persons.service.ts) y seeds.
-
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
 | `DB_SCHEMA` | `beneficiaries`<br>`public` | Define el esquema PostgreSQL del servicio de beneficiarios. |
@@ -155,10 +143,6 @@ Los siguientes microservicios comparten un patron simple: su `.env.compose` solo
 
 Archivo documentado: `Global-Service/.env.compose`
 
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./Global-Service/src/config/envs.ts) -> [src/config/index.ts](./Global-Service/src/config/index.ts) -> consumo principal en [src/database/data-source.ts](./Global-Service/src/database/data-source.ts).
-
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
 | `DB_SCHEMA` | `global`<br>`public` | Define el esquema PostgreSQL del servicio global. |
@@ -169,10 +153,6 @@ Nota tecnica: `src/config/envs.ts` si define `DB_SCHEMA` con default `global`, p
 ## 3.5. Variables de `Kiosk-Service`
 
 Archivo documentado: `Kiosk-Service/.env.compose`
-
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./Kiosk-Service/src/config/envs.ts) -> [src/config/index.ts](./Kiosk-Service/src/config/index.ts) -> consumo principal en [src/database/data-source.ts](./Kiosk-Service/src/database/data-source.ts).
 
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
@@ -185,10 +165,6 @@ Nota tecnica: `src/config/envs.ts` deja `beneficiaries` como default, asi que en
 
 Archivo documentado: `App-Mobile-Service/.env.compose`
 
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./App-Mobile-Service/src/config/envs.ts) -> [src/config/index.ts](./App-Mobile-Service/src/config/index.ts) -> consumo principal en [src/database/data-source.ts](./App-Mobile-Service/src/database/data-source.ts).
-
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
 | `DB_SCHEMA` | `app_mobile`<br>`public` | Define el esquema PostgreSQL del servicio movil. |
@@ -199,10 +175,6 @@ Nota tecnica: `src/config/envs.ts` exporta `dbSchema`, pero Joi no lo valida com
 ## 3.7. Variables de `Records-Service`
 
 Archivo documentado: `Records-Service/.env.compose`
-
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./Records-Service/src/config/envs.ts) -> [src/config/index.ts](./Records-Service/src/config/index.ts) -> consumo principal en [src/database/data-source.ts](./Records-Service/src/database/data-source.ts).
 
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
@@ -215,10 +187,6 @@ Nota tecnica: `src/config/envs.ts` no marca `DB_SCHEMA` ni el resto del bloque D
 
 Archivo documentado: `Loans-Service/.env.compose`
 
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./Loans-Service/src/config/envs.ts) -> [src/config/index.ts](./Loans-Service/src/config/index.ts) -> consumo principal en [src/database/data-source.ts](./Loans-Service/src/database/data-source.ts).
-
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
 | `DB_SCHEMA` | `loans`<br>`public` | Define el esquema PostgreSQL del servicio de prestamos. |
@@ -230,21 +198,10 @@ Nota tecnica: `src/config/envs.ts` valida `NATS_SERVERS`, pero no exige el bloqu
 
 Archivo documentado: `Contributions-Service/.env.compose`
 
-Ruta real:
-
-`.env` + `.env.compose` -> [src/config/envs.ts](./Contributions-Service/src/config/envs.ts) -> [src/config/index.ts](./Contributions-Service/src/config/index.ts) -> consumo principal en [src/database/data-source.ts](./Contributions-Service/src/database/data-source.ts).
-
 | Variable | Valor de ejemplo | Funcion |
 | --- | --- | --- |
 | `DB_SCHEMA` | `contributions`<br>`public` | Define el esquema PostgreSQL del servicio de contribuciones. |
 
 Nota tecnica: `src/config/envs.ts` tampoco obliga `DB_SCHEMA`, pero `data-source.ts` lo usa al crear la conexion, asi que documentarlo explicitamente ayuda a evitar errores silenciosos.
-
-<a id="4-observaciones-utiles"></a>
-## 4. Observaciones utiles
-
-- Los `.env.compose` y `.env.compose.template` del repo ya quedaron alineados con el esquema esperado de cada microservicio; si se crean nuevos ambientes, conviene conservar esa misma convencion.
-- En los archivos de entorno se normalizo el formato `CLAVE=valor` sin espacios alrededor de `=` para evitar lecturas inconsistentes entre herramientas.
-- Cuando Joi no exige `DB_SCHEMA`, el error puede no aparecer al arrancar la app sino recien al inicializar TypeORM o al ejecutar migraciones y seeds.
 
 Ir al [README.md](./README.md)
