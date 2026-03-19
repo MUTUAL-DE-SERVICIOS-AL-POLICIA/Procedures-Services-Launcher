@@ -206,7 +206,7 @@ Archivo documentado: `Gateway-Service/.env.compose.template`
     <tr>
       <td><code>FTP_PASSWORD</code></td>
       <td><code>test</code><br><code>secure123</code></td>
-      <td>Contrasena del usuario FTP. Forma parte de la autenticacion inicial al abrir la sesion y, si es invalida, el gateway no podra usar ningun flujo que dependa de almacenamiento remoto.</td>
+      <td>Contraseña del usuario FTP. Forma parte de la autenticacion inicial al abrir la sesion y, si es invalida, el gateway no podra usar ningun flujo que dependa de almacenamiento remoto.</td>
     </tr>
     <tr>
       <td><code>FTP_ROOT</code></td>
@@ -231,7 +231,7 @@ Archivo documentado: `Gateway-Service/.env.compose.template`
     <tr>
       <td><code>SMS_SERVER_PASSWORD</code></td>
       <td><code>"TEST1234"</code><br><code>"pass123"</code></td>
-      <td>Contrasena que el gateway envia al proveedor SMS junto con el usuario. Si es incorrecta, el proveedor puede responder error o negar el envio aunque la URL y el resto de parametros sean validos.</td>
+      <td>Contraseña que el gateway envia al proveedor SMS junto con el usuario. Si es incorrecta, el proveedor puede responder error o negar el envio aunque la URL y el resto de parametros sean validos.</td>
     </tr>
     <tr>
       <td><code>SMS_PROVIDER</code></td>
@@ -313,7 +313,7 @@ Archivo documentado: `Auth-Service/.env.compose.template`
     <tr>
       <td><code>LDAP_ADMIN_PASSWORD</code></td>
       <td><code>password</code><br><code>secure_pass</code></td>
-      <td>Contrasena del usuario administrador LDAP. Sin ella el servicio no puede hacer bind contra el directorio y, por tanto, tampoco consultar o validar usuarios desde LDAP.</td>
+      <td>Contraseña del usuario administrador LDAP. Sin ella el servicio no puede hacer bind contra el directorio y, por tanto, tampoco consultar o validar usuarios desde LDAP.</td>
     </tr>
     <tr>
       <td><code>LDAP_ACCOUNT_PREFIX</code></td>
