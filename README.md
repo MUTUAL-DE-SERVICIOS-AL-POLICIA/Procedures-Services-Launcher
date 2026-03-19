@@ -27,18 +27,12 @@ git submodule update --init --recursive
 cp .env.template .env
 ```
 
-6. Crear el `.env.compose` de cada microservicio antes de ejecutar Docker:
-
+6. Crear el `.env.compose` de cada microservicio de `.env.compose.template` a `.env.compose`
 ```sh
-cp Gateway-Service/.env.compose.template Gateway-Service/.env.compose
-cp Auth-Service/.env.compose.template Auth-Service/.env.compose
-cp Beneficiary-Service/.env.compose.template Beneficiary-Service/.env.compose
-cp Global-Service/.env.compose.template Global-Service/.env.compose
-cp Kiosk-Service/.env.compose.template Kiosk-Service/.env.compose
-cp App-Mobile-Service/.env.compose.template App-Mobile-Service/.env.compose
-cp Records-Service/.env.compose.template Records-Service/.env.compose
-cp Loans-Service/.env.compose.template Loans-Service/.env.compose
-cp Contributions-Service/.env.compose.template Contributions-Service/.env.compose
+# Ejecutar en el directorio principal `Procedures-Services-Launcher`
+for template in */.env.compose.template; do
+  cp "$template" "${template%.template}"
+done
 ```
 
 7. Editar `.env` (raiz) y cada `.env.compose` (micro-service) con los valores reales del entorno.
