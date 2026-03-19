@@ -27,9 +27,8 @@ git submodule update --init --recursive
 cp .env.template .env
 ```
 
-6. Crear el `.env.compose` de cada microservicio de `.env.compose.template` a `.env.compose`
+6. Crear el `.env.compose` de cada microservicio de `.env.compose.template` a `.env.compose`. Ejecutar en el directorio principal `Procedures-Services-Launcher`
 ```sh
-# Ejecutar en el directorio principal `Procedures-Services-Launcher`
 for template in */.env.compose.template; do
   cp "$template" "${template%.template}"
 done
