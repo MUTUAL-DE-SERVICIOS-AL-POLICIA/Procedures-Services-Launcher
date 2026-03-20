@@ -21,7 +21,7 @@ cd Procedures-Services-Launcher
 git submodule update --init --recursive
 ```
 
-4. Crear el archivo de las variables de entorno raíz:
+4. Crear el archivo `.env` en el proyecto Padre:
 
 ```sh
 cp .env.template .env
@@ -80,7 +80,7 @@ Reemplaza `gateway-service-dev` o `gateway-service` por el servicio que correspo
 ## Añadir un nuevo microservicio como submódulo
 
 1. Crear el nuevo repositorio.
-2. Agregarlo desde la raíz del launcher:
+2. Agregarlo desde la raíz del launcher (Proyecto Padre):
 
 ```sh
 git submodule add <url-del-repositorio>

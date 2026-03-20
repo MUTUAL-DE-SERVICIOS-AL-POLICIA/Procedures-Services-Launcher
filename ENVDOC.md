@@ -1,20 +1,20 @@
 # ENVDOC
 
-Guia de referencia para las variables de entorno que usa el launcher con Docker Compose.
+Guia de referencia para las variables de entorno que usa el Proyecto Padre con Docker Compose.
 Aqui se documenta:
 
-- Que archivos de entorno carga Docker Compose
-- Que variable usa cada servicio
-- Donde se consume en el codigo
-- Para que sirve
-- Un ejemplo de valor por variable
+- Que archivos de entorno carga Docker Compose.
+- Que variable usa cada servicio.
+- Donde se consume en el codigo.
+- ¿Para que sirve?
+- Un ejemplo de valor por variable.
 
 
 ## Indice
 
 - [1. Archivos de entorno que intervienen](#1-archivos-de-entorno-que-intervienen)
 - [2. Orden de carga en Docker Compose](#2-orden-de-carga-en-docker-compose)
-- [2.1 Confirmacion por proyecto](#21-confirmacion-por-proyecto)
+- [2.1 Archivos que contiene el proyecto padre](#21-archivos-que-contiene-el-proyecto-padre)
 - [3. Variables compartidas del `.env` raiz](#3-variables-compartidas-del-env-raiz)
 - [3.1. Variables de `Gateway-Service`](#31-variables-de-gateway-service)
 - [3.2. Variables de `Auth-Service`](#32-variables-de-auth-service)
@@ -27,7 +27,7 @@ Aqui se documenta:
 - [3.9. Variables de `Contributions-Service`](#39-variables-de-contributions-service)
 
 <a id="1-archivos-de-entorno-que-intervienen"></a>
-## 1. Archivos de entorno que intervienen
+## 1. Archivos de entorno que intervienen en el Proyecto Padre (raiz)
 
 <table width="100%">
   <thead>
@@ -40,7 +40,7 @@ Aqui se documenta:
   <tbody>
     <tr>
       <td><code>.env</code></td>
-      <td>Launcher completo (raiz)</td>
+      <td>Proyecto Padre completo (raiz)</td>
       <td>Actua como capa base del stack. Docker Compose lo lee para interpolar variables del YAML y para inyectar valores compartidos en varios contenedores, por ejemplo credenciales de base de datos, NATS o puertos publicados.</td>
     </tr>
     <tr>
@@ -64,12 +64,10 @@ Aqui se documenta:
 <a id="2-orden-de-carga-en-docker-compose"></a>
 ## 2. Orden de carga en Docker Compose
 
-En `docker-compose.yml` y `docker-compose.prod.yml`, cada microservicio carga:
+Los archivos `docker-compose.yml` y `docker-compose.prod.yml` se encargan de cargar las variables de entorno para cada microservicio, tanto en modo desarrollo como en produccion. Cada microservicio carga:
 
 1. `.env`
 2. `./<Servicio>/.env.compose`
-
-Los archivos `docker-compose.yml` y `docker-compose.prod.yml` se encargan de cargar las variables de entorno para cada microservicio, tanto en modo desarrollo como en produccion.
 
 Esto implica lo siguiente:
 
@@ -77,8 +75,8 @@ Esto implica lo siguiente:
 - el `.env.compose` del servicio agrega sus variables propias, por ejemplo `DB_SCHEMA`, LDAP, FTP o integraciones externas
 - si una clave existe en ambos archivos, prevalece el valor del `.env.compose` del microservicio dentro del contenedor
 
-<a id="21-confirmacion-por-proyecto"></a>
-## 2.1 Confirmacion por proyecto
+<a id="21-archivos-que-contiene-el-proyecto-padre"></a>
+## 2.1 Archivos que contiene el proyecto padre
 
 Se verificaron los `.env.compose.template` de estos microservicios del launcher:
 
@@ -109,7 +107,7 @@ Estas variables no pertenecen a un solo microservicio; se reutilizan en varios c
     <tr>
       <td><code>CLIENT_GATEWAY_PORT</code></td>
       <td><code>3000</code><br><code>8080</code></td>
-      <td>Publica el puerto del contenedor del gateway hacia el host. Es el numero que usara el navegador, Postman o cualquier cliente externo para entrar al stack; cambiarlo modifica el puerto expuesto por Docker Compose, no el puerto interno del proceso NestJS.</td>
+      <td>Publica el puerto del contenedor del gateway hacia el host. Es el puerto que usara el navegador, Postman o cualquier cliente externo para entrar al stack; cambiarlo modifica el puerto expuesto por Docker Compose, no el puerto interno del proceso NestJS.</td>
     </tr>
     <tr>
       <td><code>DB_PASSWORD</code></td>
@@ -129,7 +127,7 @@ Estas variables no pertenecen a un solo microservicio; se reutilizan en varios c
     <tr>
       <td><code>DB_PORT</code></td>
       <td><code>5433</code><br><code>5432</code></td>
-      <td>Define el puerto TCP usado para abrir la sesion con PostgreSQL. El valor se parsea como numero y debe coincidir con el puerto disponible en el host indicado por <code>DB_HOST</code>.</td>
+      <td>Define el puerto TCP usado para abrir la sesion con PostgreSQL. El valor se parsea como puerto y debe coincidir con el puerto disponible en el host indicado por <code>DB_HOST</code>.</td>
     </tr>
     <tr>
       <td><code>DB_USERNAME</code></td>
@@ -149,7 +147,7 @@ Estas variables no pertenecen a un solo microservicio; se reutilizan en varios c
     <tr>
       <td><code>ENVIRONMENT</code></td>
       <td><code>dev</code><br><code>prod</code></td>
-      <td>Activa comportamiento dependiente del ambiente, por ejemplo Swagger en el gateway cuando vale <code>dev</code>. No suele cambiar la logica de negocio central, pero si aspectos operativos, de debugging y de exposicion de herramientas.</td>
+      <td>Activa comportamiento dependiente del ambiente.</td>
     </tr>
   </tbody>
 </table>
