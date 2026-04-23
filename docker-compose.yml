@@ -17,7 +17,7 @@ services:
     volumes:
       - ./Gateway-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
 
   beneficiary-service-dev:
@@ -28,7 +28,7 @@ services:
     volumes:
       - ./Beneficiary-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
 
   global-service-dev:
@@ -39,7 +39,7 @@ services:
     volumes:
       - ./Global-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
 
   auth-service-dev:
@@ -50,7 +50,7 @@ services:
     volumes:
       - ./Auth-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
 
   kiosk-service-dev:
@@ -61,7 +61,7 @@ services:
     volumes:
       - ./Kiosk-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
 
   app-mobile-service-dev:
@@ -72,7 +72,7 @@ services:
     volumes:
       - ./App-Mobile-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
   records-service-dev:
     build: ./Records-Service
@@ -82,7 +82,7 @@ services:
     volumes:
       - ./Records-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
 
   loans-service-dev:
@@ -93,7 +93,7 @@ services:
     volumes:
       - ./Loans-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
 
   contributions-service-dev:
@@ -104,5 +104,5 @@ services:
     volumes:
       - ./Contributions-Service:/app
       - /app/node_modules
-    command: yarn start:dev
+    command: pnpm start:dev
     restart: always
