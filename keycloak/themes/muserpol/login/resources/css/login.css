@@ -1,0 +1,244 @@
+/* ===== Paleta ===== */
+:root {
+  --green-700: #055f32;
+  --green-600: #06733d;
+  --green-500: #088848;
+  --green-400: #2d9963;
+  --green-300: #52ab7e;
+  --green-100: #eaf6f0;
+  --text-900: #1f2937;
+  --text-700: #374151;
+  --muted-400: #9aa3af;
+  --border: #e5e7eb;
+  --bg: #f3f4f6;
+  --white: #fff;
+  --error: #dc2626;
+}
+
+/* ===== Base ===== */
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text-900);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, Noto Sans, sans-serif;
+}
+
+/* ===== Contenedor centrado ===== */
+.kc-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* ===== Card ===== */
+.kc-card {
+  width: min(980px, 92vw);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 44% 56%;
+}
+
+/* ===== Lado imagen (sin borde negro, sin overlay, sin texto encima) ===== */
+.kc-card .kc-visual {
+  background: transparent;
+  padding: 18px;
+  display: grid;
+  place-items: center;
+}
+.kc-card .kc-visual::after { display: none; }
+.kc-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+.kc-visual .kc-visual-mark { display: none; }
+
+/* ===== Lado formulario: centrado y ancho cómodo ===== */
+.kc-form-side {
+  display: grid;
+  align-items: center;
+  padding: 24px;
+}
+.kc-brand,
+.kc-title,
+#kc-messages,
+.kc-form,
+.kc-social,
+.kc-info,
+.kc-links,
+.kc-footer {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+}
+.kc-brand { display: grid; place-items: center; }
+.kc-logo { width: 76%; max-width: 320px; height: auto; }
+.kc-title {
+  margin: 4px 0 4px;
+  font-weight: 800;
+  font-size: 26px;
+  color: #111827;
+  text-align: center;
+}
+.kc-subtitle { margin-top: -6px; color: var(--text-700); text-align: center; }
+
+/* ===== Mensajes ===== */
+#kc-messages { margin: 6px 0; }
+#kc-messages .alert, .pf-c-alert {
+  border: 1px solid var(--border);
+  background: var(--green-100);
+  color: var(--text-900);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+#kc-error-message { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
+
+/* ===== Formularios (login, OTP, etc.) ===== */
+.kc-form { display: grid; gap: 12px; }
+#kc-form-login, #kc-register-form, #kc-totp-settings, form { display: grid; gap: 12px; }
+#kc-form-login label, form label {
+  font-size: 14px;
+  color: var(--text-700);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Inputs estilo “segunda imagen” */
+#kc-form-login input[type="text"],
+#kc-form-login input[type="email"],
+#kc-form-login input[type="password"],
+#kc-totp-settings input[type="text"],
+#kc-totp-settings input[type="password"],
+form input[type="text"], form input[type="password"], form input[type="email"]{
+  appearance: none;
+  width: 100%;
+  padding: 12px 14px;
+  background: #f7f7f8;
+  color: #111827;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+  transition: border .15s, box-shadow .15s, transform .05s;
+  box-shadow: 0 6px 14px rgba(17,17,17,.05);
+  box-sizing: border-box;
+}
+#kc-form-login input:hover, form input:hover { border-color: var(--green-300); }
+#kc-form-login input:focus, form input:focus{
+  border-color: var(--green-500);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--green-500) 20%, transparent);
+}
+input.field-error{
+  border-color: var(--error);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--error) 18%, transparent);
+}
+
+/* Botón principal verde, a todo lo ancho */
+#kc-login, input[type="submit"], .pf-c-button.pf-m-primary{
+  width: 100%; min-height: 46px; padding: 10px 18px;
+  font-weight: 800; font-size: 14px; letter-spacing: .3px;
+  border-radius: 12px; cursor: pointer;
+  border: 1.5px solid var(--green-600); background: var(--green-600); color: #fff;
+  transition: transform .06s, background .15s, border .15s, box-shadow .15s;
+  box-shadow: 0 12px 22px color-mix(in srgb, var(--green-600) 20%, transparent);
+}
+#kc-login:hover, input[type="submit"]:hover{ background: var(--green-700); border-color: var(--green-700); }
+#kc-login:active, input[type="submit"]:active{ transform: translateY(1px); }
+
+/* Enlaces */
+.kc-links{ margin-top: 6px; display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; }
+.kc-links a{ color: var(--green-600); text-decoration: none; }
+.kc-links a:hover{ text-decoration: underline; }
+
+/* Footer */
+.kc-footer{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  padding:14px; background:#fafafa; border-top:1px solid var(--border);
+  color:var(--muted-400); font-size:12px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px){
+  .kc-card{ grid-template-columns: 1fr; }
+  .kc-visual{ min-height: 180px; }
+}
+
+/* ===== Ajustes finos de inputs y toggle nativo ===== */
+
+/* Grupos de input (PatternFly) para colocar el ojito dentro */
+#kc-form-login .pf-c-input-group,
+#kc-form-login .input-group{ position: relative; }
+
+/* Deja espacio a la derecha para el ojito */
+#kc-form-login .pf-c-input-group > input,
+#kc-form-login .input-group > input{ padding-right: 42px; border-radius: 12px; }
+
+/* Botón nativo del toggle (posición y estilo base) */
+#kc-form-login .pf-c-input-group .pf-c-button.pf-m-control,
+#kc-form-login .input-group .pf-c-button.pf-m-control,
+#kc-form-login .kc-password-toggle,
+#kc-form-login .input-group .btn:not(#kc-login){
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 28px; width: 28px;
+  display: inline-grid; place-items: center;
+  border: none; background: transparent; color: var(--muted-400);
+  padding: 0; box-shadow: none; z-index: 2; cursor: pointer;
+  text-indent: -9999px; /* oculta cualquier texto residual */
+}
+
+/* Icono por defecto (ojo) como background SVG */
+#kc-form-login .pf-c-input-group .pf-c-button.pf-m-control,
+#kc-form-login .kc-password-toggle,
+#kc-form-login .input-group .pf-c-button.pf-m-control{
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2399a3af' stroke-width='2' viewBox='0 0 24 24'><path d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/><circle cx='12' cy='12' r='3'/></svg>")
+    no-repeat center / 18px 18px;
+}
+
+/* Hover/focus del ojito */
+#kc-form-login .pf-c-input-group .pf-c-button.pf-m-control:hover,
+#kc-form-login .kc-password-toggle:hover,
+#kc-form-login .input-group .pf-c-button.pf-m-control:hover{
+  color: var(--green-500);
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23088848' stroke-width='2' viewBox='0 0 24 24'><path d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/><circle cx='12' cy='12' r='3'/></svg>")
+    no-repeat center / 18px 18px;
+}
+
+/* Mejora progresiva: cuando la contraseña está visible (input type=text), ojo tachado */
+#kc-form-login .pf-c-input-group:has(> input[type="text"]) .pf-c-button.pf-m-control,
+#kc-form-login .input-group:has(> input[type="text"]) .pf-c-button.pf-m-control,
+#kc-form-login .pf-c-input-group:has(> input[type="text"]) .kc-password-toggle{
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2399a3af' stroke-width='2' viewBox='0 0 24 24'><path d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/><circle cx='12' cy='12' r='3'/><path d='M3 3l18 18' stroke='%2399a3af' stroke-width='2'/></svg>")
+    no-repeat center / 18px 18px;
+}
+#kc-form-login .pf-c-input-group:has(> input[type="text"]) .pf-c-button.pf-m-control:hover,
+#kc-form-login .input-group:has(> input[type="text"]) .pf-c-button.pf-m-control:hover,
+#kc-form-login .pf-c-input-group:has(> input[type="text"]) .kc-password-toggle:hover{
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23088848' stroke-width='2' viewBox='0 0 24 24'><path d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/><circle cx='12' cy='12' r='3'/><path d='M3 3l18 18' stroke='%23088848' stroke-width='2'/></svg>")
+    no-repeat center / 18px 18px;
+}
+
+/* Quita cualquier borde/outline que PatternFly le ponga al botón de control */
+.pf-c-button.pf-m-control{
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Seguridad: evita que algo sobresalga visualmente */
+.kc-form-side { overflow: hidden; }

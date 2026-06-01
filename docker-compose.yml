@@ -7,6 +7,44 @@ services:
       - 4222:4222
     restart: always
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass clave123
+    restart: always
+
+  keycloak:
+      image: quay.io/keycloak/keycloak:26.0.1
+      container_name: keycloak
+      environment:
+        KC_DB: postgres
+        KC_DB_URL_HOST: ${DB_HOST}
+        KC_DB_URL_PORT: ${DB_PORT}
+        KC_DB_URL_DATABASE: ${DB_DATABASE}
+        KC_DB_USERNAME: ${DB_USERNAME}
+        KC_DB_PASSWORD: ${DB_PASSWORD}
+        KC_DB_SCHEMA: keycloak
+        KC_HEALTH_ENABLED: "true"
+        KC_METRICS_ENABLED: "true"
+        KC_HOSTNAME: ${DB_HOST}
+        KC_HOSTNAME_STRICT: "false"
+        KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
+        KC_BOOTSTRAP_ADMIN_USER: admin
+        KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+        KC_FEATURES: token-exchange,admin-fine-grained-authz
+      command: 
+        - start-dev
+        - --spi-theme-static-max-age=-1
+        - --spi-theme-cache-themes=false
+        - --spi-theme-cache-templates=false
+      ports:
+        - "8080:8080"
+      volumes:
+        - ./keycloak/themes:/opt/keycloak/themes
+      restart: always
+
   gateway-service-dev:
     build: ./Gateway-Service
     env_file:
