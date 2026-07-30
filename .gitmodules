@@ -25,3 +25,9 @@
 [submodule "Contributions-Service"]
 	path = Contributions-Service
 	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Contributions-Service.git
+[submodule "Sales-Service"]
+	path = Sales-Service
+	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Sales-Service.git
+[submodule "Collections-Service"]
+	path = Collections-Service
+	url = https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/Collections-Service.git

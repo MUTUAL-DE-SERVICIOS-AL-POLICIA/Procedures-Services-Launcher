@@ -88,3 +88,21 @@ services:
       - .env
       - ./Contributions-Service/.env.compose
     restart: always
+
+  sales-service:
+    build:
+      context: ./Sales-Service
+      dockerfile: dockerfile.prod
+    env_file:
+      - .env
+      - ./Sales-Service/.env.compose
+    restart: always
+  
+  collections-service:
+    build:
+      context: ./Collections-Service
+      dockerfile: dockerfile.prod
+    env_file:
+      - .env
+      - ./Collections-Service/.env.compose
+    restart: always
