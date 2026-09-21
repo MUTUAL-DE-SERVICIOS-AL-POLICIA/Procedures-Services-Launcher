@@ -112,7 +112,7 @@ print_line
 echo -e "${CYAN}Selecciona la rama:${NC}"
 echo
 echo "  1) dev"
-echo "  2) test"
+echo "  2) testing"
 echo "  3) main"
 echo
 
@@ -125,7 +125,7 @@ case "$BRANCH_OPTION" in
         ;;
 
     2)
-        BRANCH="test"
+        BRANCH="testing"
         ;;
 
     3)
