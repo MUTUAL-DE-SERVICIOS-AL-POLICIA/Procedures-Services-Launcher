@@ -106,3 +106,25 @@ services:
       - /app/node_modules
     command: pnpm start:dev
     restart: always
+
+  sales-service-dev:
+    build: ./Sales-Service
+    env_file:
+      - .env
+      - ./Sales-Service/.env.compose
+    volumes:
+      - ./Sales-Service:/app
+      - /app/node_modules
+    command: pnpm start:dev
+    restart: always
+
+  collections-service-dev:
+    build: ./Collections-Service
+    env_file:
+      - .env
+      - ./Collections-Service/.env.compose
+    volumes:
+      - ./Collections-Service:/app
+      - /app/node_modules
+    command: pnpm start:dev
+    restart: always
