@@ -401,7 +401,7 @@ for PROJECT in "${SELECTED_PROJECTS[@]}"; do
         echo
         echo -e "${CYAN}→ Cambiando a rama $BRANCH...${NC}"
 
-        if ! git switch "$BRANCH"; then
+        if ! git checkout "$BRANCH"; then
 
             echo -e "${RED}✗ No se pudo cambiar a $BRANCH.${NC}"
 
@@ -415,7 +415,7 @@ for PROJECT in "${SELECTED_PROJECTS[@]}"; do
         echo
         echo -e "${CYAN}→ Creando rama local $BRANCH...${NC}"
 
-        if ! git switch --track -c "$BRANCH" "$REMOTE/$BRANCH"; then
+        if ! git checkout -b "$BRANCH" "$REMOTE/$BRANCH"; then
 
             echo -e "${RED}✗ No se pudo crear la rama $BRANCH.${NC}"
 
