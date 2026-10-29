@@ -192,6 +192,11 @@ Archivo documentado: `Gateway-Service/.env.compose.template`
       <td>Secreto que el gateway usa para validar tokens hash de ciertas peticiones integradas con PVT. Si no coincide con el emisor del hash, el guard rechazara la peticion aunque el resto de la configuracion sea correcta.</td>
     </tr>
     <tr>
+      <td><code>PVT_IMPORT_API_KEY</code></td>
+      <td><code>"una-clave-aleatoria-larga"</code></td>
+      <td>Clave compartida exclusivamente con <code>GATEWAY_API_KEY</code> de PVT-BE. Protege los endpoints de análisis e importación documental sin modificar el contrato que consume el monolito. Debe ser diferente de otros secretos del Gateway.</td>
+    </tr>
+    <tr>
       <td><code>FTP_HOST</code></td>
       <td><code>192.168.2.100</code><br><code>ftp.server.com</code></td>
       <td>Host del servidor FTP al que el gateway se conecta para subir, descargar, listar, borrar y renombrar archivos. Si este host no resuelve o no acepta la conexion, todas las operaciones documentales del gateway fallaran.</td>
@@ -281,44 +286,14 @@ La configuración SID/OIDC/Keycloak se documenta en [ENVIRONMENT.md](./ENVIRONME
   </thead>
   <tbody>
     <tr>
-      <td><code>LDAP_HOST</code></td>
-      <td><code>localhost</code><br><code>ldap.server.com</code></td>
-      <td>Host del servidor LDAP al que se conectara la estrategia de autenticacion. Si no resuelve o no responde, el servicio no podra validar credenciales contra el directorio externo.</td>
+      <td><code>PVT_IMPORT_CLIENT_ID</code></td>
+      <td><code>pvt-document-import</code></td>
+      <td>Cliente confidencial exclusivo de Keycloak que valida las credenciales enviadas por PVT-BE durante la importación documental. Debe tener habilitado Direct Access Grants y no necesita roles ni permisos de aplicación.</td>
     </tr>
     <tr>
-      <td><code>LDAP_PORT</code></td>
-      <td><code>389</code><br><code>636</code></td>
-      <td>Puerto TCP del servidor LDAP. Debe coincidir con el protocolo y la configuracion del directorio; un puerto incorrecto produce fallos de conexion antes de llegar a la busqueda o validacion del usuario.</td>
-    </tr>
-    <tr>
-      <td><code>LDAP_ADMIN_PREFIX</code></td>
-      <td><code>cn</code><br><code>uid</code></td>
-      <td>Prefijo del identificador usado para construir el <code>bindDN</code> del administrador LDAP. Forma parte de la sintaxis del DN y debe coincidir con la estructura real del directorio, por ejemplo <code>cn=admin</code> o <code>uid=admin</code>.</td>
-    </tr>
-    <tr>
-      <td><code>LDAP_ADMIN_USERNAME</code></td>
-      <td><code>root</code><br><code>admin</code></td>
-      <td>Nombre del usuario administrador que se usa en el bind tecnico al servidor LDAP. Es la parte variable que se combina con el prefijo y la base DN para formar el usuario con el que el servicio abre la sesion en el directorio.</td>
-    </tr>
-    <tr>
-      <td><code>LDAP_ADMIN_PASSWORD</code></td>
-      <td><code>password</code><br><code>secure_pass</code></td>
-      <td>Contraseña del usuario administrador LDAP. Sin ella el servicio no puede hacer bind contra el directorio y, por tanto, tampoco consultar o validar usuarios desde LDAP.</td>
-    </tr>
-    <tr>
-      <td><code>LDAP_BASEDN</code></td>
-      <td><code>"dc=example,dc=com"</code><br><code>"dc=company,dc=com"</code></td>
-      <td>Base DN usada para bind y para busquedas dentro del directorio. Es uno de los datos mas sensibles del setup LDAP, porque define desde que punto del arbol se buscan identidades; si es incorrecto, el servicio puede conectar pero no hallar usuarios.</td>
-    </tr>
-    <tr>
-      <td><code>JWT_SECRET</code></td>
-      <td><code>"your_jwt_secret"</code><br><code>"super_secret_key"</code></td>
-      <td>Secreto criptografico con el que se firman y verifican los JWT del servicio. Cambiarlo invalida los tokens ya emitidos y obliga a que emisor y validador usen exactamente el mismo valor para aceptar los tokens nuevos.</td>
-    </tr>
-    <tr>
-      <td><code>API_KEY</code></td>
-      <td><code>"internal-service-key"</code><br><code>"api_key_123"</code></td>
-      <td>Llave interna usada para verificar integraciones de confianza entre servicios o consumidores autorizados. Su objetivo es añadir una capa de control simple para llamadas internas que no dependen del login de un usuario final.</td>
+      <td><code>PVT_IMPORT_CLIENT_SECRET</code></td>
+      <td><code>"secreto-generado-por-keycloak"</code></td>
+      <td>Secreto del cliente <code>PVT_IMPORT_CLIENT_ID</code>. Auth-Service lo usa solamente contra el endpoint interno de Keycloak; nunca se devuelve a PVT-BE ni al navegador.</td>
     </tr>
     <tr>
       <td><code>USER_TEST_DEVICE</code></td>
