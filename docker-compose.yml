@@ -1,5 +1,30 @@
 services:
 
+  redis:
+    build: ./Auth-Service/redis
+    env_file:
+      - ./Auth-Service/.env.compose
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    volumes:
+      - web-redis-data:/data
+    healthcheck:
+      test: ['CMD-SHELL', 'REDISCLI_AUTH="$$WEB_REDIS_PASSWORD" redis-cli ping']
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped
+
+  keycloak:
+    build: ./Auth-Service/keycloak
+    command: ["start-dev"]
+    env_file:
+      - .env
+      - ./Auth-Service/.env.compose
+    ports:
+      - "${KEYCLOAK_PORT:-8080}:8080"
+    restart: unless-stopped
+
   nats-server-dev:
     build: ./Gateway-Service/nats
     ports:
@@ -128,3 +153,6 @@ services:
       - /app/node_modules
     command: pnpm start:dev
     restart: always
+
+volumes:
+  web-redis-data:
