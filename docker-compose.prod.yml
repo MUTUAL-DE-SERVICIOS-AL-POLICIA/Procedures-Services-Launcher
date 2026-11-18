@@ -1,5 +1,23 @@
 services:
 
+  redis:
+    build: ./Auth-Service/redis
+    env_file:
+      - ./Auth-Service/.env.compose
+    volumes:
+      - web-redis-data:/data
+    restart: unless-stopped
+
+  keycloak:
+    build: ./Auth-Service/keycloak
+    command: ["start", "--http-enabled=true", "--proxy-headers=xforwarded", "--hostname-strict=true"]
+    env_file:
+      - .env
+      - ./Auth-Service/.env.compose
+    ports:
+      - "${KEYCLOAK_BIND_ADDRESS:-127.0.0.1}:${KEYCLOAK_PORT:-8080}:8080"
+    restart: unless-stopped
+
   nats-server:
     build: ./Gateway-Service/nats
     ports:
@@ -42,6 +60,10 @@ services:
     env_file:
       - .env
       - ./Auth-Service/.env.compose
+    depends_on:
+      - nats-server
+      - redis
+      - keycloak
     restart: always
 
   kiosk-service:
@@ -106,3 +128,6 @@ services:
       - .env
       - ./Collections-Service/.env.compose
     restart: always
+
+volumes:
+  web-redis-data:

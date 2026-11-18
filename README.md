@@ -36,7 +36,13 @@ done
 
 7. Editar `.env` (raiz) y cada `.env.compose` (micro-service) con los valores reales del entorno.
 
-La documentacion de cada variable de entorno: [ENVDOC.md](./ENVDOC.md).
+Documentación de configuración:
+
+- [Matriz de variables por ambiente](./ENVIRONMENT.md)
+- [Configuración reproducible de Keycloak](./KEYCLOAK-CONFIGURATION.md)
+- [Checklist para un ambiente de pruebas](./DEPLOYMENT-CHECKLIST.md)
+- [Autenticación web y sesiones](./WEB-AUTHENTICATION.md)
+- [Variables históricas de los microservicios](./ENVDOC.md)
 
 ### Ejecutar el comando para construir las imagenes y correr la aplicacion
 
@@ -48,8 +54,23 @@ docker compose build --no-cache && docker compose up
 
 #### Producción (PROD)
 
+El Compose de producción usa el mismo `.env` raíz como configuración compartida. Créalo desde la plantilla y reemplaza todos los ejemplos por valores del ambiente:
+
 ```sh
-docker compose -f docker-compose.prod.yml build --no-cache && docker compose -f docker-compose.prod.yml up -d
+cp .env.template .env
+```
+
+Establece `ENVIRONMENT=prod`, `WEB_AUTH_ENABLED=true` y configura los `.env.compose` de cada servicio con sus integraciones productivas. Validar antes de construir:
+
+```sh
+docker compose -f docker-compose.prod.yml config --quiet
+```
+
+Construir y levantar:
+
+```sh
+docker compose -f docker-compose.prod.yml build --no-cache
+docker compose -f docker-compose.prod.yml up -d
 ```
 
 ## RECREAR CONTENEDORES
